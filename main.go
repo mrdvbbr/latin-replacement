@@ -45,6 +45,9 @@ func main() {
 			msg.Chat.ID,
 			fmt.Sprintf("%s aytmoqchi bo'ldiki: %s\n%s lotincha yoz olipta !", username, latin, username),
 		)
+		if msg.ReplyToMessage != nil {
+			reply.ReplyToMessageID = msg.ReplyToMessage.MessageID
+		}
 		if _, err := bot.Send(reply); err != nil {
 			log.Printf("could not send replacement message: %v", err)
 		}
