@@ -65,6 +65,16 @@ func HasCyrillic(s string) bool {
 	return false
 }
 
+// HasLatin reports whether s contains at least one Latin character.
+func HasLatin(s string) bool {
+	for _, r := range s {
+		if unicode.Is(unicode.Latin, r) {
+			return true
+		}
+	}
+	return false
+}
+
 // Do converts Uzbek Cyrillic text to the official Uzbek Latin script.
 // Non-Cyrillic characters are passed through unchanged.
 func Do(text string) string {

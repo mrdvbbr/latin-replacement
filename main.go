@@ -44,7 +44,6 @@ func main() {
 			continue
 		}
 
-		latin := transliterate.Do(msg.Text)
 		username := senderName(msg.From)
 
 		// Try to delete the original message (requires Delete Messages admin right).
@@ -56,7 +55,7 @@ func main() {
 		taunt := taunts[rand.Intn(len(taunts))]
 		reply := tgbotapi.NewMessage(
 			msg.Chat.ID,
-			fmt.Sprintf("👤 %s:\n▸ %s\n\n💬 %s", username, latin, taunt),
+			fmt.Sprintf("👤 %s\n\n💬 %s", username, taunt),
 		)
 		if msg.ReplyToMessage != nil {
 			reply.ReplyToMessageID = msg.ReplyToMessage.MessageID
