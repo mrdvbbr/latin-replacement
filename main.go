@@ -3,10 +3,22 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
+
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 
 	"latin-replacement/transliterate"
 )
+
+var taunts = []string{
+	"lotincha yoz olipta!",
+	"kirilcha yozma, bu 2000-yil emas!",
+	"lotin harflaridan qo'rqma, tishlamaydi!",
+	"bro, lotin bilan yoz, zamonaviy bo'l!",
+	"kirilcha yozish = eskirgan, lotin = swag!",
+	"lotin harflari bepul, ishlataver!",
+	"bro, bu yerda kirilcha yozilmaydi, qoida shu!",
+}
 
 func main() {
 	token := "8786610478:AAFQ-c8lL9uR_NCA510Euze0tDFSokUT8MI"
@@ -41,9 +53,10 @@ func main() {
 			log.Printf("could not delete message %d: %v", msg.MessageID, err)
 		}
 
+		taunt := taunts[rand.Intn(len(taunts))]
 		reply := tgbotapi.NewMessage(
 			msg.Chat.ID,
-			fmt.Sprintf("%s aytmoqchi bo'ldiki: %s\n%s lotincha yoz olipta !", username, latin, username),
+			fmt.Sprintf("👤 %s:\n▸ %s\n\n💬 %s", username, latin, taunt),
 		)
 		if msg.ReplyToMessage != nil {
 			reply.ReplyToMessageID = msg.ReplyToMessage.MessageID
